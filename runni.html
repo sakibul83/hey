@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Runni ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Poppins',sans-serif;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  overflow:hidden;
+}
+
+/* Floating hearts */
+.heart{
+  position:absolute;
+  font-size:18px;
+  opacity:0.7;
+  animation:floatUp 6s linear forwards;
+}
+@keyframes floatUp{
+  0%{transform:translateY(0); opacity:1;}
+  100%{transform:translateY(-100vh); opacity:0;}
+}
+
+/* Card */
+.card{
+  background:white;
+  padding:45px 35px;
+  width:360px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 15px 35px rgba(0,0,0,0.2);
+}
+
+h1{
+  color:#ff4d6d;
+  margin-bottom:15px;
+  font-weight:600;
+}
+
+p{
+  color:#555;
+  font-size:15px;
+  line-height:1.6;
+}
+
+img{
+  width:200px;
+  height:200px;
+  object-fit:cover;
+  border-radius:20px;
+  margin:20px 0;
+  transition:transform 0.3s ease;
+}
+img:hover{transform:scale(1.05);}
+
+.question{
+  margin:15px 0;
+  font-weight:600;
+  font-size:17px;
+  color:#ff4d6d;
+}
+
+.buttons{margin-top:15px;}
+button{
+  padding:10px 25px;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  font-weight:600;
+  margin:8px;
+  transition:transform 0.2s ease, background 0.2s ease;
+}
+#yesBtn{background:#ff4d6d;color:white;}
+#yesBtn:hover{transform:scale(1.05); background:#ff1e4d;}
+#noBtn{background:#eee; position:relative;}
+
+/* Overlay on YES */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:#ff4d6d;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-size:26px;
+  text-align:center;
+  padding:20px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.6s ease;
+}
+.overlay.active{opacity:1; pointer-events:all;}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Runni ❤️</h1>
+  <p>So… the 13th is coming, and I’m just hoping to hang out with you. just me, trying not to trip over my words while looking at you, probably failing, and laughing at how awkward I am. But honestly, I’d be glad just to see your smile, hear your voice, and enjoy the time together. 😊</p>
+
+  <img src="img/IMG_7672.jpg" alt="Runni">
+
+  <div class="question">Now tell me… are you ready for all my awkwardness and silly smiles that day?✨</div>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 😍</button>
+    <button id="noBtn">No 😢</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  Yay! Can’t wait to see you on the 13th 💖
+</div>
+
+<script>
+// floating hearts
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="💖";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.bottom="-20px";
+  heart.style.fontSize=(Math.random()*20+15)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,700);
+
+// no button moves
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+  const x=Math.random()*window.innerWidth-100;
+  const y=Math.random()*window.innerHeight-50;
+  noBtn.style.position="absolute";
+  noBtn.style.left=x+"px";
+  noBtn.style.top=y+"px";
+});
+
+// yes button smooth
+document.getElementById("yesBtn").addEventListener("click",()=>{
+  const overlay=document.getElementById("overlay");
+  overlay.classList.add("active");
+  setTimeout(()=>{
+    window.location.href="yes.html";
+  },1600); // slightly shorter, smooth
+});
+</script>
+
+</body>
+</html>
